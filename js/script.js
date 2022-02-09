@@ -1,14 +1,5 @@
 $(document).ready(function () {
-    // If a form field (fname) is empty, this function alerts a message, and returns false,
-    //  to prevent the form from being submitted.
-    function validateForm(){
-        let x = document.forms["myForm"]["fname"].value;
-        if (x == "") {
-            alert("Name must be filled out");
-            return false;
-        }
-    }
-    //    variables
+        //    variables
     let selector = {
         id : {
             firstDiv :'first-div',
@@ -23,6 +14,34 @@ $(document).ready(function () {
 
     };
 
+    searchResult.innerHTML = document.getElementById("tags").value;
+    let x = searchResult.innerHTML;
+
+    // If a form field (fname) is empty, this function alerts a message, and returns false,
+    //  to prevent the form from being submitted.
+    function validateForm(){
+        if (x == "") {
+            alert("Name must be filled out");
+            return false;
+        }
+    }
+
+    // this function prevents sending empty message.dogbreed 
+    let refuse_empty_dogBreedMessage = $.ajax({
+        
+        url:"https://dog.ceo/api/breed/" + x + "/list" ,
+        success: function (result){
+            alert(x);
+            
+            if (result.message == ""){
+                alert("this dog breed has not got any type");
+            }
+            $("#myBtn").click(function(e){
+                refuse_empty_dogBreedMessage(this.innerText)
+            });
+        }
+    })
+
     // first page display block, others display none
     // click search box and go to the second page
     // Get data from input and send it to the next page
@@ -31,6 +50,7 @@ $(document).ready(function () {
     $("#third-div").css("display", "none");
     $("#myBtn").click(function () {
         let x = document.forms["myForm"]["fname"].value;
+        
         if (x == "") {
             validateForm();
         }else{
@@ -62,7 +82,7 @@ $(document).ready(function () {
 
             // console.log(newArr);
 
-            console.log(newArr.length);
+            // console.log(newArr.length);
             $("#tags").autocomplete({
                 source: newArr
             });
