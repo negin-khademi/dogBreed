@@ -1,14 +1,15 @@
 .myPage1,
-.myPage2,
-.third-page {
+.myPage2{
     width: 100vw;
     height: 100vh;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #999;
     background-color: rgb(6, 6, 79);
 }
+
+.third-page {height: auto;}
 
 .myForm {
     display: flex;
